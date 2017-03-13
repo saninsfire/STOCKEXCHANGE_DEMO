@@ -1,0 +1,7 @@
+[
+  {"companyName":"AIRTEL","price":"1000","isUp":true,"percentage":"10%"},
+  {"companyName":"RELIANCE","price":"500","isUp":false,"percentage":"10%"},
+  {"companyName":"AIRCEL","price":"600","isUp":false,"percentage":"20.00%"},
+  {"companyName":"JIO","price":"700","isUp":true,"percentage":"10%"},
+  {"companyName":"VODAFONE","price":"400","isUp":true,"percentage":"20%"}
+]

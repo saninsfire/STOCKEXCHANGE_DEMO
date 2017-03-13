@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>Stock Exchange</title>
+<script src="jquery.min.js"></script>
+<script>
+	$(document)
+			.ready(
+					function() {
+						function ajaxBuilder() {
+							$
+									.ajax({
+										url : "http://localhost:8080/stockchange-0.0.1-SNAPSHOT/rest/getstock",
+										type : "GET",
+										dataType : 'json',
+										data : {},
+										success : function(data) {
+											buildData(data);
+										},
+										error : function(data) {
+											alert("error in fetching from JSON response of DB");
+										},
+										contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+										cache : false
+									});
+						}
+						function buildData(data) {
+							if (data && data.length > 0) {
+								var tr = '';
+								for (var i = 0; i < data.length; i++) {
+									var stock = data[i];
+									var isUp = stock.isUp ? '<img src="up.jpg" height="50" width="50"style="float:left;">'
+											: '<img src="down.jpg" height="50" width="50" style="float:left;">'
+									isUp += parseFloat(stock.percentage).toFixed(2)+"%";
+									tr += '<tr><td>' + stock.companyName
+											+ '</td><td>' + parseFloat(stock.price).toFixed(2)
+											+ '</td><td>' + isUp + '</td>'
+								}
+								$("#tableBody").html(tr);
+							}
+						}
+						ajaxBuilder();
+						setInterval(function() {
+							ajaxBuilder();
+						}, 10000);
+					});
+</script>
+</head>
+<body>
+	<div style="padding: 30px 30px 30px 450px">
+		<table border="1" cellspacing="3" cellpadding="3" width="300">
+			<thead
+				style="background-color: green; color: white; font-weight: bold">
+				<th>Company Name</th>
+				<th>Price</th>
+				<th>Percentage</th>
+
+			</thead>
+			<tbody id="tableBody">
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
